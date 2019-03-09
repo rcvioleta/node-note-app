@@ -1,0 +1,71 @@
+body, html {
+    font-family: "Segoe UI Light", sans-serif;
+}
+
+.container {
+    font-family: inherit;
+    border: 1px solid #000;
+    width: 70%;
+    padding: 1rem;
+    margin: 1rem auto;
+}
+
+.container form {
+    /* border: 1px solid orange; */
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    /* border: 1px solid orangered; */
+    margin-bottom: 1rem;
+    display: block;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: .5rem;
+    box-sizing: border-box;
+}
+
+#note-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    /* border: 1px solid orange; */
+}
+
+.note-card { 
+    width: 40%;
+    margin: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: 5px 5px 1rem #bdbcbc;
+}
+
+.note-title { 
+    background-color: #7a7979;
+    color: #fff;
+    padding: .5rem;
+}
+
+.note-title #delete {
+    float: right;
+    border: none;
+    border-radius: 20%;
+    color: #fff;
+    font-size: .8rem;
+    background: linear-gradient( #ff7675, #c0392b);
+}
+
+.note-content {
+    background-color: #eee;
+    padding: .5rem;
+}

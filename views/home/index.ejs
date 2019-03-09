@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="app-title">Note Taking App</h1>
+
+        <main>
+            <form action="/note/create" method="POST" id="myform">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <input type="text" id="content" name="content">
+                </div>
+                <div class="form-group">
+                    <button type="submit">Create Note</button>
+                </div>
+            </form>
+        </main>
+
+        <hr>
+
+        <div class="saved-notes">
+            <div id="note-group"></div>
+        </div>
+    </div>
+
+    <script>
+        const createNoteForm = document.getElementById('myform')
+
+        createNoteForm.addEventListener('submit', (e) => {
+            const title = e.target.title.value
+            const content = e.target.content.value
+            fetch('/note/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title, content })
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
+        })
+
+        window.addEventListener('load', () => {
+            fetch('/note/show')
+            .then(res => {
+                if (res.status === 204) {
+                    alert('Notes not found')
+                } else return res.json()
+            })
+            .then(data => {
+                if (!data) return
+                let myNotes = ''
+                const noteGroup = document.getElementById('note-group')
+
+                data.forEach(note => {
+                    const card = noteGroup.appendChild(document.createElement('div'))
+                    card.className = 'note-card'
+
+                    const form = card.appendChild(document.createElement('form'))
+                    form.action = '/note/delete'
+                    form.method = 'POST'
+                    form.id = 'delete-note'
+
+                    const noteTitle = form.appendChild(document.createElement('div'))
+                    noteTitle.className = 'note-title'
+                    noteTitle.appendChild(document.createTextNode(note.title))
+
+                    const titleInput = noteTitle.appendChild(document.createElement('input'))
+                    titleInput.type = 'hidden'
+                    titleInput.name = 'title'
+                    titleInput.value = note.title
+
+                    const deleteBtn = noteTitle.appendChild(document.createElement('button'))
+                    deleteBtn.type = 'submit'
+                    deleteBtn.id = 'delete'
+                    deleteBtn.appendChild(document.createTextNode('x'))
+
+                    const noteContent = card.appendChild(document.createElement('div'))
+                    noteContent.className = 'note-content'
+                    noteContent.appendChild(document.createTextNode(note.content))
+
+                    const deleteNoteForm = document.getElementById('delete-note')
+        
+                    deleteNoteForm.addEventListener('submit', (e) => {
+                        e.preventDefault()
+                        const title = e.target.title.value
+                        fetch('/note/delete', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ title: title })
+                        })
+                        .then(res => res.json())
+                        .then(data => console.log(data))
+                        .catch(err => console.log(err))
+                    })
+                })
+            })
+            .catch(err => console.log(err.response))
+        })
+    </script>
+</body>
+</html>
