@@ -14,7 +14,7 @@
         <h1 class="app-title">Note Taking App</h1>
 
         <main class="main-content">
-            <form action="/note/create" method="POST" id="myform">
+            <form action="/create" method="POST" id="myform">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title">
@@ -43,7 +43,7 @@
             e.preventDefault()
             const title = e.target.title.value
             const content = e.target.content.value
-            fetch('/note/create', {
+            fetch('/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,7 +56,7 @@
         })
 
         window.addEventListener('load', () => {
-            fetch('/note/show')
+            fetch('/show')
                 .then(res => {
                     if (res.status === 204) {
                         alert('Notes not found')
@@ -72,7 +72,7 @@
                         card.className = 'note-card'
 
                         const form = card.appendChild(document.createElement('form'))
-                        form.action = '/note/delete'
+                        form.action = '/delete'
                         form.method = 'POST'
                         form.id = 'delete-note'
                         form.onsubmit = submit
@@ -107,7 +107,7 @@
                 const title = e.target.title.value
 
                 console.log(title)
-                fetch('/note/delete', {
+                fetch('/delete', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

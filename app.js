@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 
 const noteRoutes = require('./routes/note')
 
-app.use('/note', noteRoutes)
+app.use(noteRoutes)
 
 app.listen(port, () => {
     console.log(`Server running on port:${port}`)
