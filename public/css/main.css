@@ -85,3 +85,15 @@ textarea {
     font-size: .8rem;
     margin-bottom: 0;
 }
+
+@media (max-width: 599px) {
+    .container {
+        width: 90%;
+    }
+
+    .note-card {
+        margin: 0;
+        width: 45%;
+        font-size: 13px;
+    }
+}
