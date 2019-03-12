@@ -92,7 +92,7 @@ textarea {
     }
 
     .note-card {
-        margin: 0;
+        margin: 1rem auto;
         width: 45%;
         font-size: 13px;
     }
