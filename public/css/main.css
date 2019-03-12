@@ -5,7 +5,7 @@ body, html {
 .container {
     font-family: inherit;
     border: 1px solid #000;
-    width: 70%;
+    width: 50%;
     padding: 1rem;
     margin: 1rem auto;
 }
@@ -27,12 +27,19 @@ body, html {
     font-weight: bold;
 }
 
-.form-group input {
+textarea {
+    resize: none;
+}
+
+.form-group input,
+.form-group textarea {
     width: 100%;
     border-radius: 3px;
     border: 1px solid #ccc;
     padding: .5rem;
     box-sizing: border-box;
+    /* font-family: 'Segoe UI Light', sans-serif; */
+    font-family: inherit;
 }
 
 #note-group {
@@ -44,6 +51,7 @@ body, html {
 }
 
 .note-card { 
+    align-self: flex-start;
     width: 40%;
     margin: 1rem;
     border: 1px solid #ccc;
@@ -66,6 +74,14 @@ body, html {
 }
 
 .note-content {
-    background-color: #eee;
+    background-color: #fdfdfd;
+    font-size: 1.1rem;
     padding: .5rem;
+    min-height: 30px;
+}
+
+.note-created {
+    font-style: italic;
+    font-size: .8rem;
+    margin-bottom: 0;
 }

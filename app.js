@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 
+const port = process.env.PORT || 3000
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -21,6 +23,6 @@ const noteRoutes = require('./routes/note')
 
 app.use('/note', noteRoutes)
 
-app.listen(3000, () => {
-    console.log('Server running on port:3000')
+app.listen(port, () => {
+    console.log(`Server running on port:${port}`)
 })
